@@ -216,6 +216,30 @@ hr {
 
 
 
+footer {
+  width: 100%;
+  height: 5vh;
+  color: #266886;
+  font-size: 18rem;
+  margin-top: 1%;
+}
+
+.my-reference {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+}
+
+.my-reference a:hover {
+  color: #266886;
+  text-decoration: underline;
+}
+
+.my-reference a:active {
+  text-decoration: none;
+}
+
 
 /* 
 @media (max-width:1200px){
