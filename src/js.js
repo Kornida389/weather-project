@@ -48,6 +48,7 @@ currentDate.innerHTML = `${date}`;
 //--------Temp-display--------//
 
 function showTemp(response) {
+  console.log(response);
   document.querySelector("#current-city").innerHTML = response.data.name;
   document.querySelector("#current-temp").innerHTML = Math.round(
     response.data.main.temp
@@ -58,6 +59,41 @@ function showTemp(response) {
   document.querySelector("#current-highest").innerHTML = Math.round(
     response.data.main.temp_max
   );
+  let weatherDescription = response.data.weather[0].description;
+  const img = document.querySelector("#icon");
+
+  if (weatherDescription === "clear sky" && hour > 4 && hour < 18) {
+    img.src = "./img/sunny.svg";
+  }
+  if (weatherDescription === "clear sky" && hour < 4 && hour > 18) {
+    img.src = "./img/night.svg";
+  }
+  if (weatherDescription === "scattered clouds" && hour > 4 && hour < 18 || weatherDescription === "few clouds" && hour > 4 && hour < 18 || weatherDescription === "broken clouds" && hour > 4 && hour < 18) {
+    img.src = "./img/cloudy-sunny.svg";
+  }
+  if (weatherDescription === "scattered clouds" && hour < 4 && hour > 18 || weatherDescription === "few clouds" && hour < 4 && hour > 18 || weatherDescription === "broken clouds" && hour < 4 && hour > 18) {
+    img.src = "./img/cloudy-night.svg";
+  }
+  if (weatherDescription === "broken clouds" && hour > 4 && hour < 18 || weatherDescription === "broken clouds" && hour < 4 && hour > 18 || weatherDescription === "broken clouds" && hour > 4 && hour < 18 || weatherDescription === "broken clouds" && hour < 4 && hour > 18 || weatherDescription === "mist" && hour > 4 && hour < 18 || weatherDescription === "mist" && hour < 4 && hour > 18) {
+    img.src = "./img/cloudy.svg";
+  }
+
+  if (weatherDescription === "shower rain" && hour > 4 && hour < 18 || weatherDescription === "shower rain" && hour < 4 && hour > 18) {
+    img.src = "./img/rainy.svg";
+  }
+  if (weatherDescription === "rain" && hour > 4 && hour < 18) {
+    img.src = "./img/rainy-sunny.svg";
+  }
+  if (weatherDescription === "thunderstorm" && hour > 4 && hour < 18 || weatherDescription === "thunderstorm" && hour < 4 && hour > 18) {
+    img.src = "./img/thunder.svg";
+  }
+  if (weatherDescription === "snow" && hour > 4 && hour < 18) {
+    img.src = "./img/snowy-sunny.svg";
+  }
+  if (weatherDescription === "snow" && hour < 4 && hour > 18) {
+    img.src = "./img/snowy.svg";
+  }
+
 }
 
 //--------Search--------//
