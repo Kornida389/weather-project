@@ -48,7 +48,6 @@ currentDate.innerHTML = `${date}`;
 //--------Temp-display--------//
 
 function showTemp(response) {
-  console.log(response);
   document.querySelector("#current-city").innerHTML = response.data.name;
   document.querySelector("#current-temp").innerHTML = Math.round(
     response.data.main.temp
@@ -186,6 +185,7 @@ tempF.addEventListener("click", clickF);
 
 function clickC(event) {
   event.preventDefault();
+
   let currentTemp = document.querySelector("#current-temp");
   let currentLowest = document.querySelector("#current-lowest");
   let currentHighest = document.querySelector("#current-highest");
