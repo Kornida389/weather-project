@@ -62,35 +62,48 @@ function showTemp(response) {
   let weatherDescription = response.data.weather[0].description;
   const img = document.querySelector("#icon");
 
-  if (weatherDescription === "clear sky" && hour > 4 && hour < 18) {
+  //clear sky
+  if (weatherDescription === "clear sky" && hour > 4 || weatherDescription === "clear sky" && hour < 18) {
     img.src = "./img/sunny.svg";
   }
-  if (weatherDescription === "clear sky" && hour < 4 && hour > 18) {
+  if (weatherDescription === "clear sky" && hour <= 4 || weatherDescription === "clear sky" && hour >= 18) {
     img.src = "./img/night.svg";
   }
-  if (weatherDescription === "scattered clouds" && hour > 4 && hour < 18 || weatherDescription === "few clouds" && hour > 4 && hour < 18 || weatherDescription === "broken clouds" && hour > 4 && hour < 18) {
+
+  //scattered, few clouds
+  if (weatherDescription === "scattered clouds" && hour > 4 || weatherDescription === "scattered clouds" && hour < 18 || weatherDescription === "few clouds" && hour > 4 || weatherDescription === "few clouds" && hour < 18) {
     img.src = "./img/cloudy-sunny.svg";
   }
-  if (weatherDescription === "scattered clouds" && hour < 4 && hour > 18 || weatherDescription === "few clouds" && hour < 4 && hour > 18 || weatherDescription === "broken clouds" && hour < 4 && hour > 18) {
+  if (weatherDescription === "scattered clouds" && hour <= 4 || weatherDescription === "scattered clouds" && hour >= 18 || weatherDescription === "few clouds" && hour <= 4 || weatherDescription === "few clouds" && hour >= 18) {
     img.src = "./img/cloudy-night.svg";
   }
-  if (weatherDescription === "broken clouds" && hour > 4 && hour < 18 || weatherDescription === "broken clouds" && hour < 4 && hour > 18 || weatherDescription === "broken clouds" && hour > 4 && hour < 18 || weatherDescription === "broken clouds" && hour < 4 && hour > 18 || weatherDescription === "mist" && hour > 4 && hour < 18 || weatherDescription === "mist" && hour < 4 && hour > 18) {
+
+  //broken clouds, mist
+  if (weatherDescription === "broken clouds" && hour > 4 || weatherDescription === "broken clouds" && hour < 18 || weatherDescription === "broken clouds" && hour <= 4 || weatherDescription === "broken clouds" && hour >= 18 || weatherDescription === "mist" && hour > 4 || weatherDescription === "mist" && hour < 18 || weatherDescription === "mist" && hour <= 4 || weatherDescription === "mist" && hour >= 18) {
     img.src = "./img/cloudy.svg";
   }
 
-  if (weatherDescription === "shower rain" && hour > 4 && hour < 18 || weatherDescription === "shower rain" && hour < 4 && hour > 18) {
+
+  //shower rain
+  if (weatherDescription === "shower rain" && hour > 4 || weatherDescription === "shower rain" && hour < 18 || weatherDescription === "shower rain" && hour <= 4 || weatherDescription === "shower rain" && hour >= 18) {
     img.src = "./img/rainy.svg";
   }
-  if (weatherDescription === "rain" && hour > 4 && hour < 18) {
+
+  //rain
+  if (weatherDescription === "rain" && hour > 4 || weatherDescription === "rain" && hour < 18) {
     img.src = "./img/rainy-sunny.svg";
   }
-  if (weatherDescription === "thunderstorm" && hour > 4 && hour < 18 || weatherDescription === "thunderstorm" && hour < 4 && hour > 18) {
+
+  //thunderstorm
+  if (weatherDescription === "thunderstorm" && hour > 4 || weatherDescription === "thunderstorm" && hour < 18 || weatherDescription === "thunderstorm" && hour <= 4 || weatherDescription === "thunderstorm" && hour >= 18) {
     img.src = "./img/thunder.svg";
   }
-  if (weatherDescription === "snow" && hour > 4 && hour < 18) {
+
+  //snow
+  if (weatherDescription === "snow" && hour > 4 || weatherDescription === "snow" && hour < 18) {
     img.src = "./img/snowy-sunny.svg";
   }
-  if (weatherDescription === "snow" && hour < 4 && hour > 18) {
+  if (weatherDescription === "snow" && hour <= 4 || weatherDescription === "snow" && hour >= 18) {
     img.src = "./img/snowy.svg";
   }
 
@@ -150,9 +163,20 @@ searchCity(navigator.geolocation.getCurrentPosition(searchLocation));
 function clickF(event) {
   event.preventDefault();
   let currentTemp = document.querySelector("#current-temp");
+  let currentLowest = document.querySelector("#current-lowest");
+  let currentHighest = document.querySelector("#current-highest");
+
   let temp = currentTemp.innerHTML;
+  let lowest = currentLowest.innerHTML;
+  let highest = currentHighest.innerHTML;
+
   temp = Number(temp);
+  lowest = Number(lowest);
+  highest = Number(highest);
+
   currentTemp.innerHTML = Math.round((temp * 9) / 5 + 32);
+  currentLowest.innerHTML = Math.round((lowest * 9) / 5 + 32);
+  currentHighest.innerHTML = Math.round((highest * 9) / 5 + 32);
 }
 
 let tempF = document.querySelector("#temp-f");
@@ -163,9 +187,20 @@ tempF.addEventListener("click", clickF);
 function clickC(event) {
   event.preventDefault();
   let currentTemp = document.querySelector("#current-temp");
+  let currentLowest = document.querySelector("#current-lowest");
+  let currentHighest = document.querySelector("#current-highest");
+
   let temp = currentTemp.innerHTML;
+  let lowest = currentLowest.innerHTML;
+  let highest = currentHighest.innerHTML;
+
   temp = Number(temp);
+  lowest = Number(lowest);
+  highest = Number(highest);
+
   currentTemp.innerHTML = Math.round((temp - 32) / 1.8);
+  currentLowest.innerHTML = Math.round((lowest - 32) / 1.8);
+  currentHighest.innerHTML = Math.round((highest - 32) / 1.8);
 }
 
 let tempC = document.querySelector("#temp-c");
