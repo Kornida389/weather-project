@@ -45,9 +45,39 @@ currentDay.innerHTML = `${day},`;
 currentMonth.innerHTML = `${month}`;
 currentDate.innerHTML = `${date}`;
 
-//--------Temp-display--------//
 
+//-------------Forecast-------------//
+function displayForecast() {
+  let forecastOne = document.querySelector("#forecast-1");
+  forecastOne.innerHTML = `<div class="future__col-temp">17°C</div>
+            <div class="future__col-date">October 2</div>
+            <div class="future__col-weekday">Tue</div>`;
+
+  let forecastTwo = document.querySelector("#forecast-2");
+  forecastTwo.innerHTML = `<div class="future__col-temp">18°C</div>
+            <div class="future__col-date">October 3</div>
+            <div class="future__col-weekday">Wed</div>`;
+
+  let forecastThree = document.querySelector("#forecast-3");
+  forecastThree.innerHTML = `<div class="future__col-temp">16°C</div>
+            <div class="future__col-date">October 4</div>
+            <div class="future__col-weekday">Thu</div>`;
+
+  let forecastFour = document.querySelector("#forecast-4");
+  forecastFour.innerHTML = `<div class="future__col-temp">15°C</div>
+            <div class="future__col-date">October 5</div>
+            <div class="future__col-weekday">Fri</div>`;
+
+  let forecastFive = document.querySelector("#forecast-5");
+  forecastFive.innerHTML = `<div class="future__col-temp">13°C</div>
+            <div class="future__col-date">October 6</div>
+            <div class="future__col-weekday">Sat</div>`;
+}
+
+
+//--------Temperature-display--------//
 function showTemp(response) {
+  console.log(response.data.weather[0].description);
   document.querySelector("#current-city").innerHTML = response.data.name;
   document.querySelector("#current-temp").innerHTML = Math.round(
     response.data.main.temp
@@ -68,7 +98,6 @@ function showTemp(response) {
   if (weatherDescription === "clear sky" && hour <= 4 || weatherDescription === "clear sky" && hour >= 18) {
     img.src = "./img/night.svg";
   }
-
   //scattered, few clouds
   if (weatherDescription === "scattered clouds" && hour > 4 || weatherDescription === "scattered clouds" && hour < 18 || weatherDescription === "few clouds" && hour > 4 || weatherDescription === "few clouds" && hour < 18) {
     img.src = "./img/cloudy-sunny.svg";
@@ -76,28 +105,26 @@ function showTemp(response) {
   if (weatherDescription === "scattered clouds" && hour <= 4 || weatherDescription === "scattered clouds" && hour >= 18 || weatherDescription === "few clouds" && hour <= 4 || weatherDescription === "few clouds" && hour >= 18) {
     img.src = "./img/cloudy-night.svg";
   }
-
   //broken clouds, mist
   if (weatherDescription === "broken clouds" && hour > 4 || weatherDescription === "broken clouds" && hour < 18 || weatherDescription === "broken clouds" && hour <= 4 || weatherDescription === "broken clouds" && hour >= 18 || weatherDescription === "mist" && hour > 4 || weatherDescription === "mist" && hour < 18 || weatherDescription === "mist" && hour <= 4 || weatherDescription === "mist" && hour >= 18) {
     img.src = "./img/cloudy.svg";
   }
-
-
+  //overcast clouds
+  if (weatherDescription === "overcast clouds" && hour > 4 || weatherDescription === "overcast clouds" && hour < 18 || weatherDescription === "overcast clouds" && hour <= 4 || weatherDescription === "overcast clouds" && hour >= 18) {
+    img.src = "./img/cloudy.svg";
+  }
   //shower rain
   if (weatherDescription === "shower rain" && hour > 4 || weatherDescription === "shower rain" && hour < 18 || weatherDescription === "shower rain" && hour <= 4 || weatherDescription === "shower rain" && hour >= 18) {
     img.src = "./img/rainy.svg";
   }
-
   //rain
   if (weatherDescription === "rain" && hour > 4 || weatherDescription === "rain" && hour < 18) {
     img.src = "./img/rainy-sunny.svg";
   }
-
   //thunderstorm
   if (weatherDescription === "thunderstorm" && hour > 4 || weatherDescription === "thunderstorm" && hour < 18 || weatherDescription === "thunderstorm" && hour <= 4 || weatherDescription === "thunderstorm" && hour >= 18) {
     img.src = "./img/thunder.svg";
   }
-
   //snow
   if (weatherDescription === "snow" && hour > 4 || weatherDescription === "snow" && hour < 18) {
     img.src = "./img/snowy-sunny.svg";
@@ -105,7 +132,6 @@ function showTemp(response) {
   if (weatherDescription === "snow" && hour <= 4 || weatherDescription === "snow" && hour >= 18) {
     img.src = "./img/snowy.svg";
   }
-
 }
 
 //--------Search--------//
@@ -147,6 +173,8 @@ currentButton.addEventListener("click", currentLocation);
 
 //-------Current Location at Load----//
 searchCity(navigator.geolocation.getCurrentPosition(searchLocation));
+displayForecast();
+
 //
 //
 //
@@ -205,3 +233,4 @@ function clickC(event) {
 
 let tempC = document.querySelector("#temp-c");
 tempC.addEventListener("click", clickC);
+
