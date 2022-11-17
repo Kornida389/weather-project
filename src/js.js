@@ -47,7 +47,8 @@ currentDate.innerHTML = `${date}`;
 
 
 //-------------Forecast-------------//
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastOne = document.querySelector("#forecast-1");
   forecastOne.innerHTML = `<div class="future__col-temp">17°C</div>
             <div class="future__col-date">October 2</div>
@@ -75,9 +76,11 @@ function displayForecast() {
 }
 function getForecast(coordinates) {
   console.log(coordinates);
-  let apiKey = "01a39de43ae645c87e4580d2bd3cf422";
+  let apiKey = "5b396a5a47080bcdb4080b48bf07ot01";
   let unit = "metric";
-  let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=${unit}`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
 }
 //--------Temperature-display--------//
 function showTemp(response) {
@@ -137,7 +140,7 @@ function showTemp(response) {
   if (weatherDescription === "snow" && hour <= 4 || weatherDescription === "snow" && hour >= 18) {
     img.src = "./img/snowy.svg";
   }
-  getForecast(response.data.coord);
+  getForecast(response.data.coordinates);
 
 }
 
@@ -180,8 +183,6 @@ currentButton.addEventListener("click", currentLocation);
 
 //-------Current Location at Load----//
 searchCity(navigator.geolocation.getCurrentPosition(searchLocation));
-displayForecast();
-
 //
 //
 //
