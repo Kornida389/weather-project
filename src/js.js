@@ -73,10 +73,15 @@ function displayForecast() {
             <div class="future__col-date">October 6</div>
             <div class="future__col-weekday">Sat</div>`;
 }
-
-
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "01a39de43ae645c87e4580d2bd3cf422";
+  let unit = "metric";
+  let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
+}
 //--------Temperature-display--------//
 function showTemp(response) {
+  console.log(response);
   console.log(response.data.weather[0].description);
   document.querySelector("#current-city").innerHTML = response.data.name;
   document.querySelector("#current-temp").innerHTML = Math.round(
@@ -132,6 +137,8 @@ function showTemp(response) {
   if (weatherDescription === "snow" && hour <= 4 || weatherDescription === "snow" && hour >= 18) {
     img.src = "./img/snowy.svg";
   }
+  getForecast(response.data.coord);
+
 }
 
 //--------Search--------//
